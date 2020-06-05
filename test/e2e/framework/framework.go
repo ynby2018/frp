@@ -88,11 +88,7 @@ func (f *Framework) AfterEach() {
 
 	RemoveCleanupAction(f.cleanupHandle)
 
-	os.RemoveAll(f.TempDirectory)
-	f.TempDirectory = ""
-	f.UsedPorts = nil
-	f.serverConfPaths = nil
-	f.clientConfPaths = nil
+	// stop processor
 	for _, p := range f.serverProcesses {
 		p.Stop()
 	}
@@ -101,6 +97,18 @@ func (f *Framework) AfterEach() {
 	}
 	f.serverProcesses = nil
 	f.clientProcesses = nil
+
+	// clean directory
+	os.RemoveAll(f.TempDirectory)
+	f.TempDirectory = ""
+	f.serverConfPaths = nil
+	f.clientConfPaths = nil
+
+	// release used ports
+	for _, port := range f.UsedPorts {
+		f.portAllocator.Release(port)
+	}
+	f.UsedPorts = nil
 }
 
 var portRegex = regexp.MustCompile(`{{ \.Port.*? }}`)

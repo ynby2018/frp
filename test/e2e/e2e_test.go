@@ -8,6 +8,11 @@ import (
 
 	"github.com/fatedier/frp/test/e2e/framework"
 	"github.com/fatedier/frp/utils/log"
+
+	// test source
+	_ "github.com/fatedier/frp/test/e2e/basic"
+
+	_ "github.com/onsi/ginkgo"
 )
 
 // handleFlags sets up all flags and parses the command line.

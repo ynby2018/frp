@@ -8,4 +8,4 @@ if [ $? -ne 0 ]; then
     go get -u github.com/onsi/ginkgo/ginkgo
 fi
 
-ginkgo -nodes=1 ${ROOT}/test/e2e -- -frpc-path=${ROOT}/bin/frpc -frps-path=${ROOT}/bin/frps -log-level=debug
+ginkgo -nodes=2 ${ROOT}/test/e2e -- -frpc-path=${ROOT}/bin/frpc -frps-path=${ROOT}/bin/frps -log-level=debug
